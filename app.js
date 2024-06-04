@@ -8,9 +8,21 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
+require('dotenv').config();
+const MONGODB_URI = process.env.MONGODB_URI
+// Set up mongoose connection
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const mongoDB = MONGODB_URI
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
