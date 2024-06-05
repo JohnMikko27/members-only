@@ -2,3 +2,7 @@ extends layout
 block content 
 
     h1 index
+    if user !== undefined 
+        p hello #{user.username}
+    else 
+        p Please login to see messages

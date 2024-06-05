@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler')
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs')
 
+
 exports.createUser = [
     body('firstName', 'first name must not be empty').trim().isLength({min: 1}).escape(),
     body('lastName', 'last name must not be empty').trim().isLength({min: 1}).escape(),
@@ -19,7 +20,6 @@ exports.createUser = [
             })
         }
 
-        // use bcrypt
         bcrypt.hash(req.body.password, 10, async(err, hashedPassword) => {
             // add an error handler?
             try {
@@ -38,3 +38,4 @@ exports.createUser = [
         });
     })
 ]
+
