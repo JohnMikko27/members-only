@@ -1,30 +1,32 @@
 extends layout 
 block content 
 
-    h1 index
-    if user !== undefined 
-        p hello #{user.username}
-        if !user.membershipStatus 
-            a(href="/memberForm") Become a member
+    h1 Home 
+    div.welcome
+        if user !== undefined 
+            p hello #{user.username}
+            if !user.membershipStatus 
+                a(href="/memberForm") Become a member
+            else 
+                p You are a member of this club
+                a(href='/createMessage') Create message
         else 
-            p You are a member of this club
-            a(href='/createMessage') Create message
-    else 
-        p Please login to see messages
-        a(href='/login') Login
+            p Please login to see messages
+            a(href='/login') Login
 
     if messages.length 
-        each message in messages
-            div.message
-                p #{message.title}
-                p #{message.text}
-                div.author
-                    if (user !== undefined && user.membershipStatus) || (user !== undefined && user.isAdmin)
-                        p Created by: #{message.user.firstName} #{message.user.lastName}
-                    else 
-                        p Created by: Anonymous
-                if user !== undefined && user.isAdmin
-                    a(href=`/delete/${message._id}`) Delete message
+        div.messagesContainer
+            each message in messages
+                div.message
+                    p#message-title #{message.title}
+                    p #{message.text}
+                    div.author
+                        if (user !== undefined && user.membershipStatus) || (user !== undefined && user.isAdmin)
+                            p Created by: #{message.user.firstName} #{message.user.lastName}
+                        else 
+                            p Created by: Anonymous
+                    if user !== undefined && user.isAdmin
+                        a(href=`/delete/${message._id}`) Delete message
     else 
         p There are no messages
 

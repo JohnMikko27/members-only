@@ -2,13 +2,14 @@ extends layout
 block content
 
     h1 Become a member 
-    form(action="", method="post") 
-        div
-            label(for='secret')
-            input#secret(type='text', name='secret', placeholder='secret', required)
-        button(type='submit') Submit
+    div.loginFormContainer
+        form.loginForm(action="", method="post") 
+            div
+                label(for='secret') Secret
+                input#secret(type='text', name='secret', placeholder='secret', required)
+            button(type='submit') Submit
 
-    if errors   
-        ul 
-            for error in errors 
-                li= error.msg
+        if errors   
+            ul 
+                for error in errors 
+                    li= error.msg

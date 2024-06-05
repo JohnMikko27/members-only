@@ -1,29 +1,30 @@
 extends layout 
 block content
     h1 Sign Up
-    form(action="", method="post") 
-        div 
-            label(for='firstName') First name
-            input#firstName(type='text', name='firstName', placeholder='first name', value=(firstName === undefined ? '' : firstName), required)
-        div 
-            label(for='lastName') Last name
-            input#lastName(type='text', name='lastName', placeholder='last name', value=(lastName === undefined ? '' : lastName), required)
-        div 
-            label(for='username') Username
-            input#username(type='text', name='username', placeholder='username',  value=(username === undefined ? '' : username),required)
-        div 
-            label(for='password') Password
-            input#password(type='password', name='password', required)
-        div 
-            label(for='confirmPassword') Confirm password
-            input#confirmPassword(type='password', name='confirmPassword', required)
-        div Are you an admin
-            div
-                input#admin(type='checkbox', name='admin')
-                label#admin Yes (if no, don't click the checkbox)
-        button(type='submit') Submit
-    
-    if errors   
-        ul 
-            for error in errors 
-                li= error.msg
+    div.loginFormContainer
+        form.loginForm(action="", method="post") 
+            div 
+                label(for='firstName') First name
+                input#firstName(type='text', name='firstName', placeholder='first name', value=(firstName === undefined ? '' : firstName), required)
+            div 
+                label(for='lastName') Last name
+                input#lastName(type='text', name='lastName', placeholder='last name', value=(lastName === undefined ? '' : lastName), required)
+            div 
+                label(for='username') Username
+                input#username(type='text', name='username', placeholder='username',  value=(username === undefined ? '' : username),required)
+            div 
+                label(for='password') Password
+                input#password(type='password', name='password', required)
+            div 
+                label(for='confirmPassword') Confirm password
+                input#confirmPassword(type='password', name='confirmPassword', required)
+            div Are you an admin
+                div
+                    input#admin(type='checkbox', name='admin')
+                    label#admin Yes (if no, don't click the checkbox)
+            button(type='submit') Submit
+        
+        if errors   
+            ul 
+                for error in errors 
+                    li= error.msg

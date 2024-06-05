@@ -25,4 +25,4 @@ Deployed using Railway
 
 ## Future additions
 
-I plan to improve the CSS in the future. I didn't do it yet because I was focused on making sure that the actuall functionality of the app was working
+I plan to improve the CSS in the future. I only added basic styling because I just wanted to make sure that the actual functionality of the app was working
