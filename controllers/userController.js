@@ -3,21 +3,34 @@ const asyncHandler = require('express-async-handler')
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs')
 
-
 exports.createUser = [
+
     body('firstName', 'first name must not be empty').trim().isLength({min: 1}).escape(),
     body('lastName', 'last name must not be empty').trim().isLength({min: 1}).escape(),
-    body('username', 'username must not be empty').trim().isLength({min: 1}).escape(),
+    body('username', 'username must not be empty and must not be taken').trim().isLength({min: 1}).escape(),
+    body('username', 'username is taken already').custom(async(value) => {
+        const user = await User.findOne({ username: value })
+        if (user) {
+            throw new Error('username already in use');
+        }
+    }),
     body('password', 'password must not be empty').trim().isLength({min: 1}).escape(),
-    body('confirmPassword', 'confirm password must not be empty').trim().isLength({min: 1}).escape(),
+    body('confirmPassword', 'passwords do not match').custom((value, { req }) => {
+        return value === req.body.password;
+    }),
 
     asyncHandler(async(req, res, next) => {
+
         const errors = validationResult(req)
     
         if (!errors.isEmpty()) {
             res.render('signup', {
-                errors: errors.array()
+                errors: errors.array(),
+                firstName: req.body.firstName,
+                lastName: req.body.lastName, 
+                username: req.body.username, 
             })
+            return;
         }
 
         bcrypt.hash(req.body.password, 10, async(err, hashedPassword) => {
