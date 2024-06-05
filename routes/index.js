@@ -5,6 +5,7 @@ const passport = require("passport");
 const isAuth = require('./auth').isAuth
 
 router.get('/', function(req, res, next) {
+  console.log(req.user)
   res.render('index', { user: req.user });
 });
 
@@ -25,5 +26,9 @@ router.post('/login',
 router.get('/protected', isAuth, (req, res, next) => {
   res.send('you made it to protected')
 })
+
+router.get('/memberForm', (req, res, next) => res.render('memberForm'))
+
+router.post('/memberForm', userController.postMemberForm)
 
 module.exports = router;

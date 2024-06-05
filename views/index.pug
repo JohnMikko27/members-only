@@ -4,5 +4,10 @@ block content
     h1 index
     if user !== undefined 
         p hello #{user.username}
+        if !user.membershipStatus 
+            a(href="/memberForm") Become a member
+        else 
+            p You are a member of this club
     else 
         p Please login to see messages
+        a(href='/login') Login
