@@ -42,6 +42,7 @@ exports.createUser = [
                     username: req.body.username, 
                     password: hashedPassword,
                     membershipStatus: false,
+                    isAdmin: (req.body.admin ? true : false)
                 })
                 await user.save()
                 res.redirect('/login')

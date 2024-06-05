@@ -21,8 +21,8 @@ async function main() {
   mongoose.connection.close();
 }
 
-async function userCreate(firstName, lastName, username, password, membershipStatus) {
-    const user = new User({ firstName: firstName, lastName: lastName, username: username, password: password, membershipStatus: membershipStatus })
+async function userCreate(firstName, lastName, username, password, membershipStatus, isAdmin) {
+    const user = new User({ firstName: firstName, lastName: lastName, username: username, password: password, membershipStatus: membershipStatus, isAdmin: isAdmin })
     await user.save()
     users.push(user)
     console.log(`Added ${firstName} ${lastName} with username ${username} to the database`)
@@ -37,8 +37,8 @@ async function messageCreate(title, text, user) {
 async function createUsers() {
     console.log('Adding users...')
     await Promise.all([
-        userCreate('Joe', 'Smith', 'joesmith', 'password', 'true'),
-        userCreate('Jane', 'Doe', 'janedoe', 'password', 'false'),
+        userCreate('John Mikko', 'Velasquez', 'johnmiks27', 'pw', 'true', 'true'),
+        userCreate('fakefirst', 'fakelast', 'fake', 'fake', 'true', 'false'),
     ])
 }
 

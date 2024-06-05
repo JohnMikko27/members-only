@@ -27,3 +27,8 @@ exports.postCreateMessage = [
         res.redirect('/')
     })
 ]
+
+exports.postDeleteForm = asyncHandler(async(req, res, next) => {
+    await Message.findByIdAndDelete(req.params.id)
+    res.redirect('/')
+})

@@ -36,4 +36,8 @@ router.get('/createMessage', (req, res, next) => res.render('createMessage'))
 
 router.post('/createMessage', messageController.postCreateMessage)
 
+router.get('/delete/:id', (req, res, next) => res.render('deleteForm'))
+
+router.post('/delete/:id', messageController.postDeleteForm)
+
 module.exports = router;

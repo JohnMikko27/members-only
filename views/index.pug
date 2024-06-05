@@ -19,10 +19,12 @@ block content
                 p #{message.title}
                 p #{message.text}
                 div.author
-                    if user !== undefined && user.membershipStatus
+                    if (user !== undefined && user.membershipStatus) || (user !== undefined && user.isAdmin)
                         p Created by: #{message.user.firstName} #{message.user.lastName}
                     else 
                         p Created by: Anonymous
+                if user !== undefined && user.isAdmin
+                    a(href=`/delete/${message._id}`) Delete message
     else 
         p There are no messages
 
