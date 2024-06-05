@@ -62,7 +62,6 @@ exports.postMemberForm = asyncHandler(async(req, res, next) => {
         })
         return;
     }
-    // console.log(req.user)
     if (req.body.secret === process.env.SECRET) {
         const user = new User({
             firstName: req.user.firstName,
@@ -76,4 +75,3 @@ exports.postMemberForm = asyncHandler(async(req, res, next) => {
     }
     res.redirect('/')
 })
-

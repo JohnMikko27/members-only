@@ -8,6 +8,22 @@ block content
             a(href="/memberForm") Become a member
         else 
             p You are a member of this club
+            a(href='/createMessage') Create message
     else 
         p Please login to see messages
         a(href='/login') Login
+
+    if messages.length 
+        each message in messages
+            div.message
+                p #{message.title}
+                p #{message.text}
+                div.author
+                    if user !== undefined && user.membershipStatus
+                        p Created by: #{message.user.firstName} #{message.user.lastName}
+                    else 
+                        p Created by: Anonymous
+    else 
+        p There are no messages
+
+            

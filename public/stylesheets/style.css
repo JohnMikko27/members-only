@@ -2,3 +2,9 @@
   display: flex;
   justify-content: space-around;
 }
+
+.message {
+  border: 1px solid black;
+  padding: 0.5rem;
+  display: grid;
+}

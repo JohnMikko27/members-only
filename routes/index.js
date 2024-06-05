@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController')
+const messageController = require('../controllers/messageController')
 const passport = require("passport");
 const isAuth = require('./auth').isAuth
+const Message = require('../models/message')
 
-router.get('/', function(req, res, next) {
-  console.log(req.user)
-  res.render('index', { user: req.user });
+router.get('/', async(req, res, next) => {
+  const allMessages = await Message.find().populate('user').exec()
+  res.render('index', { 
+    user: req.user,
+    messages: allMessages,
+  });
 });
 
 router.get('/sign-up', (req, res, next) => {
@@ -23,12 +28,12 @@ router.post('/login',
   failureRedirect: "/login"
 }))
 
-router.get('/protected', isAuth, (req, res, next) => {
-  res.send('you made it to protected')
-})
-
 router.get('/memberForm', (req, res, next) => res.render('memberForm'))
 
 router.post('/memberForm', userController.postMemberForm)
+
+router.get('/createMessage', (req, res, next) => res.render('createMessage'))
+
+router.post('/createMessage', messageController.postCreateMessage)
 
 module.exports = router;
